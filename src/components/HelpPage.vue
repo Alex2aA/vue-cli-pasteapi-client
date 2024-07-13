@@ -6,7 +6,7 @@
                 <a @click="$router.push('/')" class="base-btn login-btn">View pastes</a>
                 <a v-if="token" @click="$router.push('/my_pastes')" class="base-btn login-btn">My pastes</a>
                 <a v-if="token" @click="$router.push('/profile')" class="base-btn login-btn">Your profile</a>
-                <a v-if="!token" @click="$router.push('/registration')" class="base-btn login-btn">Register</a>
+                <a v-if="!token" @click="$router.push('/registration')" class="base-btn login-btn">Sign in / Sign up</a>
             </div>
         </header>
         <main>

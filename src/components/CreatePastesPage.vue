@@ -10,12 +10,14 @@
     <footer>
         <h2>Category</h2>
         <select v-model="category" name="category" id="category-select">
+            <option disabled value=''>---</option>
             <option value="1">Note</option>
             <option value="2">Code</option>
             <option value="3">Article</option>
         </select>
         <h2>Expiration</h2>
         <select v-model="expiration" name="expiration" id="expiration-select">
+            <option disabled value=''>---</option>
             <option value="60">an hour</option>
             <option value="1440">a day</option>
             <option value="10080">a week</option>
@@ -35,8 +37,8 @@ export default {
     components: {HelpPage, PopUpModal},
     data() {
         return {
-            category: "",
-            expiration: '',
+            category: "1",
+            expiration: '60',
             title: '',
             text: 'Hello World!',
             resStatus: "",

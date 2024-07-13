@@ -10,22 +10,15 @@
     <div class="select-paste" v-if="!changeStatus">
         <h2>Category</h2>
         <select v-model="category" name="category" id="category-select">
+            <option disabled value="">---</option>
             <option value="1">Note</option>
             <option value="2">Code</option>
             <option value="3">Article</option>
         </select>
-        <h2>Expiration</h2>
-        <select v-model="expiration" name="expiration" id="expiration-select">
-            <option value="60">an hour</option>
-            <option value="1440">a day</option>
-            <option value="10080">a week</option>
-            <option value="43800">a month</option>
-            <option value="525599,42184">a year</option>
-        </select>
     </div>
     <div class="buttons-paste-edit" v-if="paste.can_edit">
         <DefaultButton v-if="changeStatus" @click="$router.push(`/give_access?id=${id}`)" msg="Give access to another user"></DefaultButton>
-        <DefaultButton @click="changeStatus = !changeStatus, title = paste.title, text = paste.text" msg="Change paste"></DefaultButton>
+        <DefaultButton @click="changeStatus = !changeStatus, title = paste.title, text = paste.text" :msg="!changeStatus ? 'Cancel' : 'Change paste'"></DefaultButton>
         <DefaultButton v-if="!changeStatus" @click="sendChangedPaste" msg="Save"></DefaultButton>
         <DefaultButton v-if="changeStatus" @click="deletePaste" msg="Delete paste"></DefaultButton>
     </div>
@@ -44,8 +37,7 @@ export default {
             paste: {},
             text: '',
             changeStatus: true,
-            category: '',
-            expiration: '',
+            category: '1',
             title: '',
             msg: '',
             id: '',
@@ -68,9 +60,9 @@ export default {
                 .then(res => res.json())
                 .then(body => {
                     this.paste = body.paste
-                    console.log(this.paste)
                     this.paste.created_at = dateFormat(this.paste.created_at, "dddd, mmmm dS, yyyy, h:MM:ss TT")
                     this.text = this.paste.text
+                    this.category = this.paste.category
                 })
             } else {
                 fetch("http://localhost:8080/api/v1/pastes/" + this.id, {
@@ -78,21 +70,20 @@ export default {
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8',
                 }
-            })
-            .then(res => res.json())
-            .then(body => {
-                this.paste = body.paste
-                console.log(this.paste)
-                this.paste.created_at = dateFormat(this.paste.created_at, "dddd, mmmm dS, yyyy, h:MM:ss TT")
-                this.text = this.paste.text
-            })
-            }
+                })
+                .then(res => res.json())
+                .then(body => {
+                    this.paste = body.paste
+                    this.paste.created_at = dateFormat(this.paste.created_at, "dddd, mmmm dS, yyyy, h:MM:ss TT")
+                    this.text = this.paste.text
+                    this.category = this.paste.category
+                })
+                }
         },
         sendChangedPaste() {
             this.changeStatus = !this.changeStatus
             let paste = {
                 category: Number(this.category),
-                minutes: Number(this.expiration),
                 title: this.title,
                 text: this.text
             }
@@ -144,7 +135,7 @@ export default {
             })
         }
     },
-    created () {
+    mounted () {
         this.getData()
     }
 }
@@ -177,7 +168,7 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        width: 500px;
+        width: 230px;
         margin: 0 auto 20px;
         font-size: 25px;
     }
@@ -192,7 +183,7 @@ export default {
 
     .paste {
         margin: 50px auto 0px;
-        width: 900px;
+        width: 1200px;
     }
     .paste input {
         font-size: 50px;
@@ -200,12 +191,12 @@ export default {
     .paste-text-item {
         font-size: 20px;
         margin: 20px auto;
-        width: 900px;
+        width: 1200px;
     }
     .text {
-        min-height: 100px;
-        min-width: 900px;
-        max-width: 900px;
-        max-height: 500px;
+        min-height: 700px;
+        min-width: 1200px;
+        max-width: 1200px;
+        max-height: 950px;
     }
 </style>

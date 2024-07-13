@@ -4,8 +4,8 @@
         <PopUpModal v-if="showPopUp" :msg="errors" :failed="status" :showPopUpProp="showPopUp"></PopUpModal>
         <div class="reglog-form">
             <h1>Please create an account</h1>
-            <input v-model="email" class="reglog-form__input" type="email" placeholder="Email">
             <input v-model="login" class="reglog-form__input" type="text" placeholder="Login">
+            <input v-model="email" class="reglog-form__input" type="email" placeholder="Email">
             <input v-model="password" class="reglog-form__input" type="password" placeholder="Password">
             <DefaultButton msg="Register" @click="sendData"></DefaultButton>
             <a class="reglog-form__link" @click="$router.push('/login')">already have an account?</a>

@@ -52,13 +52,13 @@ export default {
 
 @media (min-width: 1920px) {
     .pop-up-container {
-        top:870px !important;
+        top:770px !important;
         animation: slide 0.6s !important;
     }
 
     @keyframes slide-back {
         0% {
-            top: 870px !important;
+            top: 770px !important;
         }
         100% {
             top: 1500px !important;
@@ -70,10 +70,10 @@ export default {
             top: 1500px !important;
         }
         50% {
-            top: 770px !important;
+            top: 680px !important;
         }
         to {
-            top: 870px !important;
+            top: 770px !important;
         }
     }
 }

@@ -1,26 +1,31 @@
 <template>
     <HelpPage></HelpPage>
-    <main class="pastes-catalog">
+    <main v-if="pastes.length != 0" class="pastes-catalog">
         <section @click="$router.push('/viewpaste?_id=' + paste.id)" v-for="paste in pastes" :key="paste.id" class="paste-item">
             <div class="paste-item__date">{{ paste.created_at }}</div>
             <div class="paste-item__vertical-line">|</div>
             <div class="paste-item__title">{{ isMobile ? (paste.title.length > 5 ? paste.title.slice(0,5) + "..." : paste.title) : ( paste.title.length > 35 ? paste.title.slice(0,35) + '...' : paste.title) }}</div>
         </section>
         <div class="pages">
-            <img class="previous" src="../assets/img/Next.png" :class="{'not_clickable':numberPage == 1}" @click=" numberPage == 1 ? '' : getPrevious()">
+            <img v-if="lastPage" class="previous" src="../assets/img/Next.png" :class="{'not_clickable':numberPage == 1}" @click=" numberPage == 1 ? '' : getPrevious()">
             <h1 v-if="lastPage">{{ numberPage }} / {{ lastPage }}</h1>
-            <img src="../assets/img/Next.png" :class="{'not_clickable':numberPage == lastPage}" @click=" numberPage == lastPage ? '' : getNext()">
+            <img v-if="lastPage" src="../assets/img/Next.png" :class="{'not_clickable':numberPage == lastPage}" @click=" numberPage == lastPage ? '' : getNext()">
         </div>
     </main>
+    <div v-else class="paste-info">
+        <h1>There are no pastes yet. Be first!</h1>
+        <DefaultButton @click="$router.push('/create')" class="button-create" msg="Create new paste"></DefaultButton>
+    </div>
 </template>
 
 <script>
 import HelpPage from './HelpPage.vue';
 import dateFormat from "dateformat";
+import DefaultButton from './DefaultButton.vue';
 
 export default {
     name: 'MyPastes-Page',
-    components: {HelpPage},
+    components: {HelpPage, DefaultButton},
     data() {
         return {
             pastes: [],
@@ -73,6 +78,15 @@ export default {
     .pages h1 {
         font-size: 20px;
     }
+}
+
+.paste-info {
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 100px;
 }
 
 .pages {
