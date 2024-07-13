@@ -145,8 +145,17 @@ export default {
     @import '../assets/css/main.css';
 
     @media (max-width: 800px) {
-        .buttons-paste-edit {
-            width: 300px !important;
+        .paste input {
+            font-size: 15px !important;
+        }
+
+        .buttons-paste-edit  {
+            width: 400px !important;
+        }
+
+        .buttons-paste-edit button {
+            height: 100px !important;
+            width: 100px !important;
         }
 
         .paste {
@@ -159,8 +168,10 @@ export default {
 
         .text {
             width: 400px !important;
+            min-height: 500px !important;
             min-width: 400px !important;
             max-width: 400px !important;
+            font-size: 15px;
         }
     }
 
@@ -194,7 +205,7 @@ export default {
         width: 1200px;
     }
     .text {
-        min-height: 700px;
+        min-height: 650px;
         min-width: 1200px;
         max-width: 1200px;
         max-height: 950px;

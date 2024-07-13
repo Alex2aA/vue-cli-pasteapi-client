@@ -4,7 +4,7 @@
         <PopUpModal v-if="showPopUp" :msg="msg" :failed="status" :showPopUpProp="showPopUp"></PopUpModal>
         <form class="paste" action="">
             <input v-model="title" type="text" placeholder="Title" class="paste__title">
-            <textarea v-model="text" id="mytextarea"></textarea>
+            <textarea placeholder="Your text" v-model="text" id="mytextarea"></textarea>
         </form>
     </main>
     <footer>
@@ -22,7 +22,7 @@
             <option value="1440">a day</option>
             <option value="10080">a week</option>
             <option value="43800">a month</option>
-            <option value="525599,42184">a year</option>
+            <option value="525599">a year</option>
         </select>
         <!-- <button class="base-btn edit-together-btn"><img src="assets/img/edit_together.png" alt="edit_together"></button> -->
         <button @click="sendData" class="base-btn publish-editor-button">PUBLISH</button>
@@ -40,7 +40,7 @@ export default {
             category: "1",
             expiration: '60',
             title: '',
-            text: 'Hello World!',
+            text: '',
             resStatus: "",
             msg: {},
             showPopUp: false,
