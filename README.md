@@ -1,3 +1,6 @@
+#
+You will not be able to run this application without the API running locally: https://github.com/zhukovrost/pasteAPI
+
 # client
 
 ## Project setup
